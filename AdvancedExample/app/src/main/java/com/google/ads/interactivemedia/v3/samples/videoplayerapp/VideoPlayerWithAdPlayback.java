@@ -327,7 +327,6 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
      * the media controller.
      */
     public void pauseContentForAdPlayback() {
-        mVideoPlayer.disablePlaybackControls();
         savePosition();
         mVideoPlayer.stopPlayback();
     }
@@ -343,7 +342,6 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
         }
         mIsAdDisplayed = false;
         mVideoPlayer.setVideoPath(mContentVideoUrl);
-        mVideoPlayer.enablePlaybackControls();
         mVideoPlayer.seekTo(mSavedContentPosition);
         mVideoPlayer.play();
     }

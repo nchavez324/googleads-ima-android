@@ -9,7 +9,7 @@ import java.util.List;
 public enum VideoMetadata {
 
     IAB_IMA_OMID_CERTIFICATION(
-        "http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4",
+        "https://s0.2mdn.net/4253510/google_ddm_animation_480P.mp4",
         "IAB IMA OMID Certification",
         "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/6062/"
                     + "IAB_IMA_OMID_Certification/Ad_Rules/omid_test&ad_rule=1&impl=s&gdfp_req=1&"
@@ -17,7 +17,7 @@ public enum VideoMetadata {
         R.drawable.thumbnail1,
         false),
     PRE_ROLL_NO_SKIP(
-            "http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4",
+            "https://s0.2mdn.net/4253510/google_ddm_animation_480P.mp4",
             "Pre-roll, linear not skippable",
             "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/"
                     + "single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast"
