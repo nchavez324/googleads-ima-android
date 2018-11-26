@@ -8,7 +8,16 @@ import java.util.List;
  */
 public enum VideoMetadata {
 
-    PRE_ROLL_NO_SKIP("https://storage.googleapis.com/gvabox/media/samples/stock.mp4",
+    IAB_IMA_OMID_CERTIFICATION(
+        "http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4",
+        "IAB IMA OMID Certification",
+        "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/6062/"
+                    + "IAB_IMA_OMID_Certification/Ad_Rules/omid_test&ad_rule=1&impl=s&gdfp_req=1&"
+                    + "env=vp&output=vmap&vid=two_midrolls_compressed&cmsid=2482459&correlator=",
+        R.drawable.thumbnail1,
+        false),
+    PRE_ROLL_NO_SKIP(
+            "http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4",
             "Pre-roll, linear not skippable",
             "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/"
                     + "single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast"
@@ -62,8 +71,9 @@ public enum VideoMetadata {
             R.drawable.thumbnail1,
             false);
 
-  public static final List<VideoMetadata> APP_VIDEOS =
-      Arrays.asList(PRE_ROLL_NO_SKIP, PRE_ROLL_SKIP, POST_ROLL, VMAP, VMAP_PODS, WRAPPER, CUSTOM);
+    public static final List<VideoMetadata> APP_VIDEOS =
+        Arrays.asList(IAB_IMA_OMID_CERTIFICATION, PRE_ROLL_NO_SKIP, PRE_ROLL_SKIP, POST_ROLL, VMAP,
+            VMAP_PODS, WRAPPER, ADSENSE, CUSTOM);
 
     /** The thumbnail image for the video. **/
     public final int thumbnail;
