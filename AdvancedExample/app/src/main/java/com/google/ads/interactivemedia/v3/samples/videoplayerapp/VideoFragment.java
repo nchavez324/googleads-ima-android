@@ -1,11 +1,14 @@
 package com.google.ads.interactivemedia.v3.samples.videoplayerapp;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
@@ -18,7 +21,7 @@ public class VideoFragment extends Fragment {
     private VideoPlayerController mVideoPlayerController;
     private VideoItem mVideoItem;
     private TextView mVideoTitle;
-    private LinearLayout mVideoExampleLayout;
+    private ScrollView mVideoExampleLayout;
 
     private OnVideoFragmentViewCreatedListener mViewCreatedCallback;
 
@@ -57,16 +60,26 @@ public class VideoFragment extends Fragment {
     }
 
     private void initUi(View rootView) {
-        VideoPlayerWithAdPlayback mVideoPlayerWithAdPlayback = (VideoPlayerWithAdPlayback)
+        VideoPlayerWithAdPlayback mVideoPlayerWithAdPlayback =
                 rootView.findViewById(R.id.videoPlayerWithAdPlayback);
         View playButton = rootView.findViewById(R.id.playButton);
         View playPauseToggle = rootView.findViewById(R.id.videoContainer);
-        ViewGroup companionAdSlot = (ViewGroup) rootView.findViewById(R.id.companionAdSlot);
-        mVideoTitle = (TextView) rootView.findViewById(R.id.video_title);
-        mVideoExampleLayout = (LinearLayout) rootView.findViewById(R.id.videoExampleLayout);
+        ViewGroup companionAdSlot = rootView.findViewById(R.id.companionAdSlot);
+        mVideoTitle = rootView.findViewById(R.id.video_title);
+        mVideoExampleLayout = rootView.findViewById(R.id.videoExampleLayout);
+        mVideoExampleLayout.setOverScrollMode(View.OVER_SCROLL_ALWAYS);
+        mVideoExampleLayout.setSmoothScrollingEnabled(true);
 
-        final TextView logText = (TextView) rootView.findViewById(R.id.logText);
-        final ScrollView logScroll = (ScrollView) rootView.findViewById(R.id.logScroll);
+        // Make the dummyScrollContent height the size of the screen height.
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ConstraintLayout constraintLayout = rootView.findViewById(R.id.constraintLayout);
+        ConstraintSet forceHeight = new ConstraintSet();
+        forceHeight.clone(constraintLayout);
+        forceHeight.constrainHeight(R.id.dummyScrollContent, displayMetrics.heightPixels);
+        forceHeight.applyTo(constraintLayout);
+
+        final TextView logText = rootView.findViewById(R.id.logText);
 
         // Provide an implementation of a logger so we can output SDK events to the UI.
         VideoPlayerController.Logger logger = new VideoPlayerController.Logger() {
@@ -75,14 +88,6 @@ public class VideoFragment extends Fragment {
                 Log.i("ImaExample", message);
                 if (logText != null) {
                     logText.append(message);
-                }
-                if (logScroll != null) {
-                    logScroll.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            logScroll.fullScroll(View.FOCUS_DOWN);
-                        }
-                    });
                 }
             }
         };
